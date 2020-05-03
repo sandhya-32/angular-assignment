@@ -1,0 +1,72 @@
+<div class="col-md-4 offset-md-4 mt-4">
+  <h4>Register Form</h4>
+  <form #registerForm='ngForm' (ngSubmit)='submitForm(registerForm)'>
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input type="text" name="fullName" id="fullName" required
+       minlength='4' #fullName='ngModel' ngModel class="form-control">
+      <div *ngIf='fullName.invalid && fullName.touched'>
+         
+        <div class="alert alert-danger" *ngIf='fullName.errors.required'>
+             This field is mandatory
+        </div>
+        <div class="alert alert-danger" *ngIf='fullName.errors.minlength'>
+          This field accepts atleast 4 characters
+        </div>
+      </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required
+         minlength='8' email #email='ngModel' ngModel class="form-control">
+        <div *ngIf='email.invalid && email.touched'>
+           
+          <div class="alert alert-danger" *ngIf='email.errors.required'>
+               This field is mandatory
+          </div>
+          <div class="alert alert-danger" *ngIf='email.errors.minlength'>
+            This field accepts atleast 8 characters
+          </div>
+          <div class="alert alert-danger" *ngIf='email.errors.email'>
+            This field accepts only an  Email
+          </div>
+        </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required
+           minlength='8'  #password='ngModel' ngModel class="form-control">
+          <div *ngIf='password.invalid && password.touched'>
+             
+            <div class="alert alert-danger" *ngIf='password.errors.required'>
+                 This field is mandatory
+            </div>
+            <div class="alert alert-danger" *ngIf='password.errors.minlength'>
+              This field accepts atleast 8 characters
+            </div>
+            
+          </div>
+          </div>
+  
+
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select (blur)="validateRole(role.value)" (change)="validateTopic(role.value)"  #role="ngModel" ngModel
+            class="form-control"  
+            [class.is-invalid]="roleHasError && role.touched"
+             name="role"  id="role">
+                <option  value="Admin">Admin</option>
+                <option  value="user">User</option>
+                <option *ngFor="let role of roles"> {{ role }}</option>
+            </select>
+            <small class="text-danger" [class.d-none]="!roleHasError || role.untouched">Please choose a role </small>
+           </div>
+
+    <button type="submit" class="btn btn-primary float-right "
+    [disabled]='registerForm.invalid || topicHasError'>
+      Register
+    </button>
+  </form>
+</div>

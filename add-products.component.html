@@ -1,0 +1,64 @@
+<div class="col-md-4 offset-md-4 mt-4">
+  <h4>Product Form</h4>
+  <form #productForm='ngForm' (ngSubmit)='submitForm(productForm)'>
+    <div class="form-group">
+      <label for="productName">ProductName</label>
+      <input type="text" name="productName" id="productName" required
+       minlength='4' #productName='ngModel' ngModel class="form-control">
+      <div *ngIf='productName.invalid && productName.touched'>
+         
+        <div class="alert alert-danger" *ngIf='productName.errors.required'>
+             This field is mandatory
+        </div>
+        <div class="alert alert-danger" *ngIf='productName.errors.minlength'>
+          This field accepts atleast 4 characters
+        </div>
+      </div>
+      </div>  
+
+    <div class="form-group">
+      <label for="productPrice">ProductPrice</label>
+      <input type="text" name="productPrice" id="productPrice" required
+      minlength='1' #productPrice='ngModel' ngModel class="form-control">
+        <div *ngIf='productPrice.invalid && productPrice.touched'>
+         
+          <div class="alert alert-danger" *ngIf='productPrice.errors.required'>
+               This field is mandatory
+          </div>
+          <div class="alert alert-danger" *ngIf='productPrice.errors.minlength'>
+            Price Cannot be 0
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="productDescription">ProductDescription</label>
+      <input type="text" name="productDescription" id="productDescription" required
+        #productDescription='ngModel' ngModel class="form-control">
+        <div *ngIf='productDescription.invalid && productDescription.touched'>
+         
+          <div class="alert alert-danger" *ngIf='productDescription.errors.required'>
+               This field is mandatory
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="productImageURL">ProductImageURL</label>
+      <input type="text" name="productImageURL" id="productImageURL" required
+        #productImageURL='ngModel' ngModel class="form-control">
+        <div *ngIf='productImageURL.invalid && productImageURL.touched'>
+         
+
+          <div class="alert alert-danger" *ngIf='productImageURL.errors.required'>
+               This field is mandatory
+          </div>
+        </div>
+    </div>
+
+    <button type="addProduts" class="btn btn-primary "
+    (click)='submitForm(productForm'>
+      addProducts
+    </button>
+  </form>
+</div>
